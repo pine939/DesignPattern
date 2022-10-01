@@ -24,6 +24,15 @@ public:
 };
 ```
 
+```c++
+// UserInfoService.h
+class UserInfoService
+{
+public:
+    virtual UserInfo* LoadUser(const std::string& username) = 0;
+};
+```
+
 2. 클라이언트가 사용하지 않는 Adaptee를 작성한다. Account는 email, name, password를 가지는 클래스이고, AccountService는 Account를 멤버로 가지며 FindAccountByUserName를 멤버 함수로 가짐으로써 주어진 username을 Account에 세팅해 주는 클래스이다.
 
 ```c++
@@ -93,7 +102,8 @@ AccountUserInfoService::AccountUserInfoService(AccountService accountService)
 
 UserInfo* AccountUserInfoService::LoadUser(const std::string& username)
 {
-    return new AccountUserInfo(accountService.FindAccountByUserName(username));  // 반환형은 인터페이스(추상)이고, 실제 반환은 구체 클래스
+    // 반환형은 인터페이스(추상)이고, 실제 반환은 구체 클래스
+    return new AccountUserInfo(accountService.FindAccountByUserName(username));  
 }
 ```
 
