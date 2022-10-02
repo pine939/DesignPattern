@@ -1,13 +1,11 @@
-//
-// Created by kangdasol on 22. 10. 2.
-//
 
-#include "CountAction.h"
-#include "BookActionImpl.h"
+#include "Shape.h"
+#include "Circle.h"
+#include "Pen.h"
 
-int main()
-{
-    Action *action = new Action(new BookActionImpl("bible"));
-    action->Play();
+int main() {
+    Shape *shape = new Circle(*new Pen());
+    shape->Draw();
+    shape->Resize();
     return 0;
 }
