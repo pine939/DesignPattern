@@ -12,6 +12,8 @@
 
 ### 예제 코드 작성
 
+사용자 이름을 받아 로그인을 처리하는 LoginHandler 프로그램을 작성해 본다.
+
 1. Target Interface를 작성한다. UserInfo는 username과 password를 반환하는 추상 클래스이고, UserInfoService는 username을 매개변수로 받아 UserInfo를 반환하는 추상 클래스이다. 여기서 Target Interface는 UserInfoService이다.
 
 ```cpp
