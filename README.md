@@ -23,7 +23,7 @@
 **Structural**
 * [adapter](https://github.com/pine939/DesignPattern/tree/main/Structural/adapter) ✅
 * [bridge](https://github.com/pine939/DesignPattern/tree/main/Structural/bridge) ✅
-* [composite](https://github.com/pine939/DesignPattern/tree/main/Structural/composite)
+* [composite](https://github.com/pine939/DesignPattern/tree/main/Structural/composite) ✅
 * [decorator](https://github.com/pine939/DesignPattern/tree/main/Structural/decorator)
 * [facade](https://github.com/pine939/DesignPattern/tree/main/Structural/facade)
 * [flyweight](https://github.com/pine939/DesignPattern/tree/main/Structural/flyweight)
