@@ -43,8 +43,6 @@ public:
     std::vector<std::shared_ptr<FileSystem>> fs;
 };
 
-
-
 int main() {
     FileSystem *fileSystem = new Directory();
     fileSystem->Add(std::make_shared<File>("clean code"));
