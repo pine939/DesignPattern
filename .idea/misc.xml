@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/Behavioral/chain_of_responsibility">
+  <component name="CMakeWorkspace" PROJECT_DIR="$PROJECT_DIR$/Structural/composite">
     <contentRoot DIR="$PROJECT_DIR$" />
   </component>
 </project>
