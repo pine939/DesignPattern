@@ -2,6 +2,8 @@
 
 ### 개념
 
+![image](https://user-images.githubusercontent.com/5865308/194677563-6cd61b3d-5d9e-4e17-b064-ecaafee16cb7.png)
+
 * 객체의 정보를 외부에 노출하지 않으면서 외부에 저장했다가 해당 상태로 복구하는 패턴이다.
 * CareTaker는 Memento를 참조하여, Originator를 몰라도 이 객체의 상태를 저장할 수 있고, 복원해 낼 수 있는 Client이다. (High Level)
 * Originator는 Memento를 사용하여 자신의 정보를 저장하고, 복구한다. (Low Level)
