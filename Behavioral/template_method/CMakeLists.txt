@@ -1,0 +1,7 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+PROJECT("template_method")
+
+SET(OUTPUT_FILE template_method)
+SET(SRC_FILE
+        Template_Method.cpp)
+ADD_EXECUTABLE(${OUTPUT_FILE} ${SRC_FILE})
