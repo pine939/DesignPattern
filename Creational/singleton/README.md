@@ -7,3 +7,36 @@
 * C++ 11 부터는 call_once()를 사용하여 편리하게 Singleton을 사용할 수 있다. std::call_once()는 std::once_flag와 함께 사용하여 Thread-Safe하게 구현 가능하다.
 
 ### 예제 코드 작성
+
+```c++
+class singleton {
+public:
+    static singleton* GetInstance() {
+        std::call_once(once_flag_, []() {
+           instance_.reset(new singleton);
+           std::cout << "singleton instance is created..." << std::endl;
+        });
+        return instance_.get();
+    }
+    void print() {
+        std::cout << "print log..." << std::endl;
+    }
+    ~singleton() = default;
+private:
+    static std::unique_ptr<singleton> instance_;
+    static std::once_flag once_flag_;
+
+    singleton() = default;
+    singleton(const singleton&) = delete;
+    singleton &operator=(const singleton&) = delete;
+
+};
+std::unique_ptr<singleton> singleton::instance_ = nullptr;
+std::once_flag singleton::once_flag_;
+
+int main() {
+    singleton::GetInstance()->print();
+    singleton::GetInstance()->print();
+    return 0;
+}
+```
