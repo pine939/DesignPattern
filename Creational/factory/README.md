@@ -104,3 +104,151 @@ int main() {
     return 0;
 }
 ```
+
+* Result
+```text
+Chocolate Cake
+Cheese Cake
+Cream Cake
+```
+
+2. ***팩토리 메소드 패턴***
+
+CakeStore가 가게를 확장하여 분점을 냈다!  
+분점마다 고유 스타일의 Cake를 만든다고 한다.
+
+CakeStore의 CreateCake 메서드를 추상 메서드로 선언한다.   
+그리고, CakeStore를 상속받은 ConcreteCake Class들에서 CreateCake메서드를 구현하여 필요한 객체를 생산한다. 
+
+* Product (Cake, Concrete Cake Class)
+```c++
+enum CakeFlavor {
+    CHOCOLATE,
+    CHEESE,
+    CREAM
+};
+
+class Cake {
+public:
+    virtual void DescriptCakeName() = 0;
+};
+
+// concrete
+class SeoulStyleChocolateCake : public Cake {
+public:
+    void DescriptCakeName() {
+        std::cout << "SeoulStyle Chocolate Cake" << std::endl;
+    }
+};
+
+class SeoulStyleCheeseCake : public Cake {
+public:
+    void DescriptCakeName() {
+        std::cout << "SeoulStyle Cheese Cake" << std::endl;
+    }
+};
+
+class SeoulStyleCreamCake : public Cake {
+public:
+    void DescriptCakeName() {
+        std::cout << "SeoulStyle Cream Cake" << std::endl;
+    }
+};
+
+class DaejeonStyleChocolateCake : public Cake {
+public:
+    void DescriptCakeName() {
+        std::cout << "DaejeonStyle Chocolate Cake" << std::endl;
+    }
+};
+
+class DaejeonStyleCheeseCake : public Cake {
+public:
+    void DescriptCakeName() {
+        std::cout << "DaejeonStyle Cheese Cake" << std::endl;
+    }
+};
+
+class DaejeonStyleCreamCake : public Cake {
+public:
+    void DescriptCakeName() {
+        std::cout << "DaejeonStyle Cream Cake" << std::endl;
+    }
+};
+```
+
+* Creator (CakeStore, Concrete CakeStore Class)
+```c++
+class CakeStore {
+private:
+    virtual Cake *CreateCake(int CakeType) = 0;
+public:
+    void OrderCake(int CakeType) {
+        Cake *cake;
+        cake = CreateCake(CakeType);
+        if (!cake) {
+            std::cout << "Undefined Cake Type" << std::endl;
+            return;
+        }
+        cake->DescriptCakeName();
+    }
+};
+
+class SeoulCakeStore : public CakeStore{
+private:
+    Cake* CreateCake(int CakeType) {
+        switch (CakeType) {
+            case CHOCOLATE:
+                return new SeoulStyleChocolateCake();
+            case CHEESE:
+                return new SeoulStyleCheeseCake();
+            case CREAM:
+                return new SeoulStyleCreamCake();
+            default:
+                return nullptr;
+        }
+    }
+};
+
+class DaejeonCakeStore : public CakeStore{
+private:
+    Cake* CreateCake(int CakeType) {
+        switch (CakeType) {
+            case CHOCOLATE:
+                return new DaejeonStyleChocolateCake();
+            case CHEESE:
+                return new DaejeonStyleCheeseCake();
+            case CREAM:
+                return new DaejeonStyleCreamCake();
+            default:
+                return nullptr;
+        }
+    }
+};
+```
+
+* Client (main)
+```c++
+int main() {
+    CakeStore *cakeStore = new SeoulCakeStore();
+    cakeStore->OrderCake(CHOCOLATE);
+    cakeStore->OrderCake(CHEESE);
+    cakeStore->OrderCake(CREAM);
+
+    cakeStore = new DaejeonCakeStore();
+    cakeStore->OrderCake(CHOCOLATE);
+    cakeStore->OrderCake(CHEESE);
+    cakeStore->OrderCake(CREAM);
+    return 0;
+}
+```
+
+* Result
+```text
+SeoulStyle Chocolate Cake
+SeoulStyle Cheese Cake
+SeoulStyle Cream Cake
+DaejeonStyle Chocolate Cake
+DaejeonStyle Cheese Cake
+DaejeonStyle Cream Cake
+```
