@@ -1,30 +1,16 @@
-## Factory Pattern
+//
+// Created by kangdasol on 22. 10. 13.
+//
 
-### 개념
+#include <string>
+#include <iostream>
 
-![image](https://user-images.githubusercontent.com/5865308/195593009-cbdfe7e4-a36e-4617-8f7d-bdd18b592d56.png)
-
-* 객체의 생성 처리를 서브 클래스로 분리하여 캡슐화하는 패턴이다. (즉, 객체 생성 부분을 팩토리 클래스에 위임한다.)
-* 특정 기능의 구현은 개별 클래스를 통해 제공 되어야 한다. 
-
-### 예제 코드 작성
-
-1. ***심플 팩토리 패턴***
-
-Cake를 만들어내는 CakeStore객체를 설계해 보자.
-이 CakeStore는 공장(SimpleCakeFactory)을 가지고 있어서 가게에서 직접 다양한 종류의 Cake를 생산할 수 있다.
-
-* Cake Type
-```c++
 enum CakeFlavor {
     CHOCOLATE,
     CHEESE,
     CREAM
 };
-```
 
-* Product인 Cake의 Interface와 Concrete Class
-```c++
 class Cake {
 public:
     virtual void DescriptCakeName() = 0;
@@ -51,10 +37,7 @@ public:
         std::cout << "Cream Cake" << std::endl;
     }
 };
-```
 
-* Creator
-```c++
 class SimpleCakeFactory {
 public:
     Cake* CreateCake(int CakeType) {
@@ -70,10 +53,7 @@ public:
         }
     }
 };
-```
 
-* Cake Store
-```c++
 class CakeStore {
 public:
     explicit CakeStore(SimpleCakeFactory *CakeFactory) {
@@ -92,10 +72,7 @@ public:
 private:
     SimpleCakeFactory *simpleCakeFactory;
 };
-```
 
-* Client (main)
-```c++
 int main() {
     CakeStore cakeStore(new SimpleCakeFactory());
     cakeStore.OrderCake(CHOCOLATE);
@@ -103,4 +80,3 @@ int main() {
     cakeStore.OrderCake(CREAM);
     return 0;
 }
-```
