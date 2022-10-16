@@ -11,6 +11,8 @@
 
 1. ***심플 팩토리 패턴***
 
+![image](https://user-images.githubusercontent.com/5865308/196029078-ca333531-0744-41a8-ba7c-b340fc00fea9.png)
+
 Cake를 만들어내는 CakeStore객체를 설계해 보자.
 이 CakeStore는 공장(SimpleCakeFactory)을 가지고 있어서 가게에서 직접 다양한 종류의 Cake를 생산할 수 있다.
 
@@ -113,6 +115,8 @@ Cream Cake
 ```
 
 2. ***팩토리 메소드 패턴***
+
+![image](https://user-images.githubusercontent.com/5865308/196029405-d04b2c5e-3051-4652-a52f-e00a4707e8a6.png)
 
 CakeStore가 가게를 확장하여 분점을 냈다!  
 분점마다 고유 스타일의 Cake를 만든다고 한다.
