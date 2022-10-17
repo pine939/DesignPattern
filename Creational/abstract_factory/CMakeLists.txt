@@ -1,0 +1,7 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+PROJECT("abstract_factory")
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+SET(OUTPUT_FILE abstract_factory)
+SET(SRC_FILE
+        Abstract_Factory.cpp)
+ADD_EXECUTABLE(${OUTPUT_FILE} ${SRC_FILE})
