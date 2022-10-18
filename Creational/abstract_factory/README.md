@@ -16,6 +16,8 @@ CakeStore의 서울지점과 대전지점에서 Cake를 만들 때 중복되는 
 
 구체적인 재료들은 어떤 팩토리를 쓰는지에 따라 달라진다.
 
+![image](https://user-images.githubusercontent.com/5865308/196404144-ece95d49-a6f1-4794-a595-d8e01d6cdd45.png)
+
 * Cake Type 
 ```c++
 enum CakeFlavor {
