@@ -17,7 +17,7 @@
 * [singleton](https://github.com/pine939/DesignPattern/tree/main/Creational/singleton) ✅
 * [factory](https://github.com/pine939/DesignPattern/tree/main/Creational/factory) ✅
 * [abstract_factory](https://github.com/pine939/DesignPattern/tree/main/Creational/abstract_factory) ✅
-* [builder](https://github.com/pine939/DesignPattern/tree/main/Creational/builder)
+* [builder](https://github.com/pine939/DesignPattern/tree/main/Creational/builder) ✅
 * [prototype](https://github.com/pine939/DesignPattern/tree/main/Creational/prototype)
 
 **Structural**
