@@ -25,4 +25,135 @@
 
 ### 예제 코드 작성
 
-온점을 trim하고, SQL Injection에 안전한 댓글 프로그램을 작성해 본다.
+Item은 기본적으로 스피드가 2배가 되는데,    
+데코레이터 패턴을 사용해 공격력이 10% 증가하고, 방어력이 20% 증가하는 Item으로 기능을 추가해 본다. (실제 게임 캐릭터의 Status를 바꾼 것 까지는 구현하지 않고, 출력하기만 했다.)
+
+1. Item 인터페이스와 이를 구현한 DefaultItem. 스피드를 2배 증가시켜 준다.   
+* Item : Component
+* DefaultItem : ConcreteComponent
+
+```c++
+class Item
+{
+public:
+    virtual void DoubleSpeed() = 0;
+};
+class DefaultItem : public Item
+{
+public:
+    void DoubleSpeed() override
+    {
+        std::cout << "double speed!!!" << std::endl;
+    }
+};
+```
+
+2. Item에 부가기능을 추가하기 위한 Decorator 최상위 클래스. Wrapper함수로써 Item인터페이스의 메서드를 호출한다.
+
+```c++
+class DecorateItem : public Item
+{
+public:
+    explicit DecorateItem(Item *item) : item_(item) {}
+    void DoubleSpeed() override
+    {
+        item_->DoubleSpeed();
+    }
+
+private:
+    Item *item_;
+};
+```
+
+3. Decorator를 상속받은 부가 기능들. 공격력을 10% 증가시켜 주고, 방어력을 20%증가시켜준다.
+
+```c++
+class UpgradeDamageDecorateItem : public DecorateItem
+{
+public:
+    explicit UpgradeDamageDecorateItem(Item *item)
+    : DecorateItem(item) {}
+    void DoubleSpeed() override
+    {
+        DecorateItem::DoubleSpeed();
+        UpgradeDamage();
+    }
+
+    static void UpgradeDamage()
+    {
+        std::cout << "upgrade 10% damage!!!" << std::endl;
+    }
+};
+class UpgradeDefenseDecorateItem : public DecorateItem
+{
+public:
+    explicit UpgradeDefenseDecorateItem(Item *item)
+    : DecorateItem(item) {}
+    void DoubleSpeed() override
+    {
+        DecorateItem::DoubleSpeed();
+        UpgradeDefense();
+    }
+
+    static void UpgradeDefense()
+    {
+        std::cout << "upgrade 20% defense!!!" << std::endl;
+    }
+};
+```
+
+4. 이 Item을 사용하는 Goblin 캐릭터.
+
+```c++
+class Goblin
+{
+public:
+    explicit Goblin(Item *item)
+    : item_(item){}
+
+    void SetStatusWithItem()
+    {
+        item_->DoubleSpeed();
+    }
+private:
+    Item *item_;
+};
+```
+
+5. Client
+
+```c++
+int main()
+{
+    std::cout << "=== Default ===" << std::endl;
+    Item *item = new DefaultItem();
+    Goblin *goblin = new Goblin(item);
+    goblin->SetStatusWithItem();
+
+    std::cout << "=== Default + Upgrade Damage ===" << std::endl;
+    item = new UpgradeDamageDecorateItem(item);
+    goblin = new Goblin(item);
+    goblin->SetStatusWithItem();
+
+    std::cout << "=== Default + Upgrade Damage + Upgrade Defense ===" << std::endl;
+    item = new UpgradeDefenseDecorateItem(item);
+    goblin = new Goblin(item);
+    goblin->SetStatusWithItem();
+    return 0;
+}
+```
+
+6. 출력 결과
+
+```text
+=== Default ===
+double speed!!!
+=== Default + Upgrade Damage ===
+double speed!!!
+upgrade 10% damage!!!
+=== Default + Upgrade Damage + Upgrade Defense ===
+double speed!!!
+upgrade 10% damage!!!
+upgrade 20% defense!!!
+
+```
