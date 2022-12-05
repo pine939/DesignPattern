@@ -13,6 +13,11 @@
 [참고](https://leveloper.tistory.com/156)   
 눌리면 특정 기능을 수행하는 버튼을 표현한 예제이다. 
 
+***Command : Interface***   
+***Button : Invoker(호출자의 코드는 변경되지 않는다.)***   
+***Light : Receiver(요청을 처리하는 방법이 바뀌더라도)***   
+***LightOnCommand, LightOffCommand : Concrete Command***   
+
 1. Command 
 * 동작을 수행하는 Execute 메서드가 포함된 Command 인터페이스이다. 
 
