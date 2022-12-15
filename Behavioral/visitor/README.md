@@ -88,4 +88,73 @@ void VitaInCan::Accept(shared_ptr<Visitor> visitor)
 }
 ```
 
-3. 
+3. 위에서 작성한 3가지 제품군을 컨베이어 벨트에 담아보자.
+```c++
+class ConveyorBelt : public Element
+{
+public:
+    ConveyorBelt()
+    {
+        vitas.push_back(make_shared<VitaInStick>());
+        vitas.push_back(make_shared<VitaInBottle>());
+        vitas.push_back(make_shared<VitaInCan>());
+    }
+    void Accept(shared_ptr<Visitor> visitor) override
+    {
+        cout << "ConveyorBelt is Ready!" << endl;
+        visitor->Visit(make_shared<ConveyorBelt>());
+        for (const auto& item : vitas)
+        {
+            item->Accept(visitor);
+        }
+    }
+private:
+    vector<shared_ptr<Element>> vitas;
+};
+```
+
+4. Visitor를 상속받는 RobotArm은 세 가지 제품군에 맞게 호랑이 그림을 그려준다.   
+Stick형에는 누워있는 호랑이를, Bottle형에는 운동하는 호랑이를, Can형에는 응원하는 호랑이를 그린다. 
+```c++
+class RobotArm : public Visitor
+{
+    void Visit(shared_ptr<ConveyorBelt> belt) override
+    {
+        cout << "Using Conveyor Belt" << endl;
+    }
+    void Visit(shared_ptr<VitaInStick> vitaInStick) override
+    {
+        cout << "Draw a Tiger laying down" << endl;
+    }
+    void Visit(shared_ptr<VitaInBottle> vitaInBottle) override
+    {
+        cout << "Draw a Tiger Exercising" << endl;
+    }
+    void Visit(shared_ptr<VitaInCan> vitaInCan) override
+    {
+        cout << "Draw a Tiger Cheering" << endl;
+    }
+};
+```
+ 
+5. main
+```c++
+int main()
+{
+    unique_ptr<Element> element = make_unique<ConveyorBelt>();
+    shared_ptr<Visitor> visitor = make_shared<RobotArm>();
+    element->Accept(visitor);
+}
+```
+
+6. 결과 
+```text
+ConveyorBelt is Ready!
+Using Conveyor Belt
+VitaInStick is Ready!
+Draw a Tiger laying down
+VitaInBottle is Ready!
+Draw a Tiger Exercising
+VitaInCan is Ready!
+Draw a Tiger Cheering
+```
