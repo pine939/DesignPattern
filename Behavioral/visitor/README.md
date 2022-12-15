@@ -22,3 +22,70 @@
 
 ### 예제 코드 작성
 
+흑호랑이 해를 맞아, 비타민 음료 제조회사 'Vita'는 제품군 별로 다른 모양의 호랑이 라벨을 제작하려고 한다. 
+제품군은 스틱, 병, 캔이 있으며 제조 공장의 컨베이어 벨트와 동작하는 로롯 팔은 각각 1개 뿐이다. 
+이를 visitor 패턴을 사용해 구현해 보자. 
+
+구현 해야 할 기능을 visitor 패턴에 맞게 분류해 보면,
+* Element Class : Element (Interface)
+* Concrete Element Class : VitaInStick, VitaInBottle, VitaInCan, ConveyorBelt
+* Visitor Class : Visitor (Interface)
+* Concrete Visitor Class : RobotArm 
+
+로 나눌 수 있다.
+
+1. 작업 대상을 추상화한 Element 인터페이스는 Visitor를 매개변수로 받는 Accept 메서드를 가지고 있다. 
+```c++
+class Element
+{
+public:
+    virtual void Accept(shared_ptr<class Visitor> visitor) = 0;
+};
+```
+
+2. Element를 상속받아 구현한 세 가지 제품군은 다음과 같다. 각 제품군의 Accept 메서드는 매개변수인 visitor의 visit 메서드를 호출하는 역할만 하고 있다. 
+this 포인터를 smart pointer로 넘기는 방법은 [여기](https://bunhere.tistory.com/460)를 참고하자. 
+```c++
+class VitaInStick : public Element, public enable_shared_from_this<VitaInStick>
+{
+public:
+    VitaInStick() : product_name_("VitaInStick") {};
+    void Accept(shared_ptr<Visitor> visitor) override;
+private:
+    string product_name_;
+};
+class VitaInBottle : public Element, public enable_shared_from_this<VitaInBottle>
+{
+public:
+    VitaInBottle() : product_name_("VitaInBottle") {};
+    void Accept(shared_ptr<Visitor> visitor) override;
+private:
+    string product_name_;
+};
+class VitaInCan : public Element, public enable_shared_from_this<VitaInCan>
+{
+public:
+    VitaInCan() : product_name_("VitaInCan") {};
+    void Accept(shared_ptr<Visitor> visitor) override;
+private:
+    string product_name_;
+};
+// implement concrete element class.
+void VitaInStick::Accept(shared_ptr<Visitor> visitor)
+{
+    cout << product_name_ << " is Ready!" << endl;
+    visitor->Visit(shared_from_this());
+}
+void VitaInBottle::Accept(shared_ptr<Visitor> visitor)
+{
+    cout << product_name_ << " is Ready!" << endl;
+    visitor->Visit(shared_from_this());
+}
+void VitaInCan::Accept(shared_ptr<Visitor> visitor)
+{
+    cout << product_name_ << " is Ready!" << endl;
+    visitor->Visit(shared_from_this());
+}
+```
+
+3. 
