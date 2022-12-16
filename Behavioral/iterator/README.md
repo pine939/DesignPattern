@@ -2,9 +2,10 @@
 
 ### 개념 
 
-![image](https://user-images.githubusercontent.com/5865308/194068227-4748f7af-a9a8-48cb-8f3b-56968e7f32e4.png)
+![image](https://user-images.githubusercontent.com/5865308/208037515-fac040e2-1d4a-447f-b0d1-209672e4dbf2.png)
 
-* 집합 내부 구조를 노출시키지 않고, 순회 하는 방법을 제공하는 패턴이다.
+* 복잡한 데이터 구조 세부 정보(list, vector, ...)를 노출시키지 않고, 해당 구조를 차례대로 순회할 수 있도록 하는 행동 디자인 패턴이다.   
+클라이언트들은 단일 iterator interface를 통해 서로 다른 컬렉션들의 요소를 탐색할 수 있다. 
 * 구성 요소
     * Client
     * Iterator<Interface> : 어떻게 순회할지에 대한 방법을 가지고 있는 인터페이스
