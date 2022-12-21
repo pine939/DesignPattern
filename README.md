@@ -34,7 +34,7 @@
 * [chain_of_responsibility](https://github.com/pine939/DesignPattern/tree/main/Behavioral/chain_of_responsibility) ✅
 * [command](https://github.com/pine939/DesignPattern/tree/main/Behavioral/command) ✅
 * [interpreter](https://github.com/pine939/DesignPattern/tree/main/Behavioral/interpreter)
-* [iterator](https://github.com/pine939/DesignPattern/tree/main/Behavioral/iterator)
+* [iterator](https://github.com/pine939/DesignPattern/tree/main/Behavioral/iterator) ✅
 * [mediator](https://github.com/pine939/DesignPattern/tree/main/Behavioral/mediator)
 * [memento](https://github.com/pine939/DesignPattern/tree/main/Behavioral/memento) ✅
 * [observer](https://github.com/pine939/DesignPattern/tree/main/Behavioral/observer)
