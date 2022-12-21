@@ -14,8 +14,10 @@
 
 ### 예제 코드 작성
 
-회사 동료들과 채팅 할 수 있는 프로그램을 중재자 패턴을 사용해 구현해 보자.   
+동료들과 채팅 할 수 있는 프로그램을 중재자 패턴을 사용해 구현해 보자.   
 
+책임 주도 설계를 기반으로 생각해 본 객체들 간의 관계는 간단히 다음과 같다.
+![image](https://user-images.githubusercontent.com/5865308/208861821-0b612a9a-f0ec-44aa-bc30-53fec5ccff55.png)
 
 * mediator interface 
 ```c++
