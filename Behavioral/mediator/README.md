@@ -34,34 +34,6 @@
   * 수신한 메시지를 출력한다.
 
 #### 구현 
-
-* mediator interface 
-```c++
-class Mediator
-{
-public:
-  virtual void AddUser(class Colleauge user) = 0;
-  virtual void DeleteUser(Colleauge user) = 0;
-  virtual void SendMessage(string message, Colleage user) = 0;
-}
-```
-
-* colleague interface 
-```c++
-class Colleage
-{
-public:
-  Colleague(Mediator mediator, string name)
-  : mediator_(mediator), name_(name) {}
-  virtual void Send(string msg) = 0;
-  virtual void Receive(string msg) = 0;
-protected:
-  Mediator mediator_;
-  string name_;
-}
-```
-
-* ConcreteMediator 
 ```c++
 #include <iostream>
 #include <string>
@@ -70,8 +42,6 @@ protected:
 #include <memory>
 #include <algorithm>
 
-
-
 class Mediator
 {
 public:
@@ -79,8 +49,6 @@ public:
     virtual void AddUser(std::shared_ptr<Colleague> user) = 0;
     virtual void DeleteUser(std::shared_ptr<Colleague> user) = 0;
 };
-
-
 
 class Colleague
 {
@@ -93,8 +61,6 @@ protected:
     std::shared_ptr<Mediator> mediator_;
     std::string name_;
 };
-
-
 
 class ConcreteMediator : public Mediator
 {
@@ -120,8 +86,6 @@ private:
     std::vector<std::shared_ptr<Colleague>> user_;
 };
 
-
-
 class ConcreteColleague : public Colleague, public std::enable_shared_from_this<ConcreteColleague>
 {
 public:
@@ -136,4 +100,5 @@ public:
         std::cout << "'" << name_ << "' Received Msg: " << msg << std::endl;
     }
 };
+
 ```
