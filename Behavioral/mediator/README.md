@@ -71,7 +71,7 @@ public:
         {
             if (user != item)
             {
-                user->Receive(msg);
+                item->Receive(msg);
             }
         }
     }
@@ -101,4 +101,27 @@ public:
     }
 };
 
+int main()
+{
+    std::shared_ptr<Mediator> mediator = std::make_shared<ConcreteMediator>();
+    std::shared_ptr<Colleague> user1 = std::make_shared<ConcreteColleague>(mediator, "kang");
+    std::shared_ptr<Colleague> user2 = std::make_shared<ConcreteColleague>(mediator, "kim");
+    std::shared_ptr<Colleague> user3 = std::make_shared<ConcreteColleague>(mediator, "kwon");
+    mediator->AddUser(user1);
+    mediator->AddUser(user2);
+    mediator->AddUser(user3);
+
+
+
+   user1->Send("hello");
+    
+    return 0;
+}
+```
+
+#### 결과 
+
+```text
+'kim' Received Msg: hello
+'kwon' Received Msg: hello
 ```
