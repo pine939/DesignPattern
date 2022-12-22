@@ -27,3 +27,23 @@ protected:
     std::list<Subscriber> subscribers_;
 };
 ```
+   
+Publisher는 자신의 상태를 업데이트 해야 하는 책임도 있다.
+![image](https://user-images.githubusercontent.com/5865308/209096521-92e696f7-22f0-4b82-b7b5-3123cbad0697.png)   
+코드에 빠르게 반영했다.
+```c++
+class Subscriber
+{
+public:
+    void GetNotifyFromPublisher(std::string msg);
+};
+
+class Publisher
+{
+public:
+    void NotifyToSubscribers();
+    void UpdateState();
+protected:
+    std::list<Subscriber> subscribers_;
+};
+```
