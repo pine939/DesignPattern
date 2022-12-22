@@ -13,7 +13,7 @@
 
 ---
 
-## Template Callback
+## Template Callback Pattern
 
 ### 개념
 
