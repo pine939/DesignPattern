@@ -37,8 +37,8 @@
 * [iterator](https://github.com/pine939/DesignPattern/tree/main/Behavioral/iterator) ✅
 * [mediator](https://github.com/pine939/DesignPattern/tree/main/Behavioral/mediator) ✅
 * [memento](https://github.com/pine939/DesignPattern/tree/main/Behavioral/memento) ✅
-* [observer](https://github.com/pine939/DesignPattern/tree/main/Behavioral/observer)
-* [state](https://github.com/pine939/DesignPattern/tree/main/Behavioral/state)
+* [observer](https://github.com/pine939/DesignPattern/tree/main/Behavioral/observer) ✅
+* [state](https://github.com/pine939/DesignPattern/tree/main/Behavioral/state) ✅
 * [strategy](https://github.com/pine939/DesignPattern/tree/main/Behavioral/stragety) ✅
-* [template_method](https://github.com/pine939/DesignPattern/tree/main/Behavioral/template_method)
+* [template_method](https://github.com/pine939/DesignPattern/tree/main/Behavioral/template_method) ✅
 * [visitor](https://github.com/pine939/DesignPattern/tree/main/Behavioral/visitor) ✅
