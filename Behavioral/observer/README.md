@@ -22,6 +22,8 @@ public:
 class Publisher
 {
 public:
+    explicit Publisher(std::list<std::unique_ptr<Subscriber>> subscriber) 
+    : subscribers_(std::move(subscriber)) {}
     void NotifyToSubscribers();
 protected:
     std::list<Subscriber> subscribers_;
@@ -41,9 +43,93 @@ public:
 class Publisher
 {
 public:
+    explicit Publisher(std::list<std::unique_ptr<Subscriber>> subscriber) 
+    : subscribers_(std::move(subscriber)) {}
     void NotifyToSubscribers();
     void UpdateState();
 protected:
     std::list<Subscriber> subscribers_;
 };
+```
+   
+Subscriber와 Publisher 인터페이스를 구현한 Concrete Class는 다음과 같다. IdolP가 상태를 업데이트 하고(UpdateState), Fan들에게 알림을 줄 수 있다.(NotifyToSubscribers)
+```c++
+class IdolP : public Publisher
+{
+public:
+    explicit IdolP(std::list<std::unique_ptr<Subscriber>> subscriber)
+    : Publisher(std::move(subscriber)) {}
+    void NotifyToSubscribers() override
+    {
+        for (auto &s : subscribers_)
+        {
+            s->GetNotifyFromPublisher(msg_);
+        }
+    }
+    void UpdateState(std::string state) override
+    {
+        if (state == "Instagram")
+        {
+            UpdateInstagram();
+        } else if (state == "VLive")
+        {
+            UpdateVLive();
+        } else
+        {
+            UpdateYoutube();
+        }
+    }
+private:
+    std::string msg_;
+    void UpdateInstagram()
+    {
+        msg_ = "P updates instagram!";
+    }
+    void UpdateVLive()
+    {
+        msg_ = "P updates vlive!";
+    }
+    void UpdateYoutube()
+    {
+        msg_ = "P updates youtube!";
+    }
+};
+
+
+
+class Fan : public Subscriber
+{
+public:
+    explicit Fan(std::string name) : name_(std::move(name)) {}
+    void GetNotifyFromPublisher(std::string msg) override
+    {
+        std::cout << name_ << " received the update msg(" << msg << ")" << std::endl;
+    }
+private:
+    std::string name_;
+};
+```
+   
+main 코드와 결과 화면 
+```c++
+int main()
+{
+    std::list<std::unique_ptr<Subscriber>> fan;
+    fan.push_back(std::make_unique<Fan>("Tiger"));
+    fan.push_back(std::make_unique<Fan>("Cat"));
+    fan.push_back(std::make_unique<Fan>("Dog"));
+
+
+
+   std::unique_ptr<Publisher> p = std::make_unique<IdolP>(std::move(fan));
+    p->UpdateState("Instagram");
+    p->NotifyToSubscribers();
+    return 0;
+}
+```
+
+```text
+Tiger received the update msg(P updates instagram!)
+Cat received the update msg(P updates instagram!)
+Dog received the update msg(P updates instagram!)
 ```
